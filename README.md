@@ -3,22 +3,23 @@
 
 Vlad's collection of Rake tasks
 
-## Installation
+## Usage
 
-Add this line to your application's Gemfile:
-
+Consult each class for gem dependencies and add the required gems to the Gemfile:
 ```ruby
+source ENV['GEM_SOURCE'] || 'https://rubygems.org'
+
 gem 'vtasks', :git => 'https://github.com/vladgh/vtasks'
+
+gem 'example', require: false
 ```
 
 And then execute:
-
-    $ bundle
-
-## Usage
+```
+$ bundle
+```
 
 Add the required tasks to the Rakefile:
-
 ```ruby
 require 'vtasks/example'
 Vtasks::Example.new
