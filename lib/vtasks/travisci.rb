@@ -22,6 +22,8 @@ module Vtasks
         require 'travis/auto_login'
       rescue LoadError
         nil # Might be in a group that is not installed
+      rescue Travis::Client::AutoLogin::NoTokenError
+        warn 'No suitable github token found'
       end
 
       desc 'Sync environment with TravisCI'
