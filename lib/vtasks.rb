@@ -1,5 +1,5 @@
-require "vtasks/version"
+require 'vtasks/version'
 
+# Vtasks module
 module Vtasks
-  # Your code goes here...
 end
