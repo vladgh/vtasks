@@ -21,7 +21,7 @@ Add the required tasks to the Rakefile:
 
 ```ruby
 require 'vtasks/example'
-VTasks::Example.new
+Vtasks::Example.new
 ```
 
 ## Development
