@@ -3,5 +3,5 @@ language: ruby
 branches:
   except:
   - "/^v\\d/"
-install: bundle install --without development --path vendor/bundle
+install: bundle install --path vendor/bundle
 script: bundle exec rake spec
