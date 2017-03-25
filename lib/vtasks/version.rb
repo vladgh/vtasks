@@ -24,5 +24,6 @@ module Vtasks
     end
   end # module Version
 
-  VERSION = Version::FULL
+  extend Version
+  VERSION = semver.values.compact.first(3).join('.')
 end
