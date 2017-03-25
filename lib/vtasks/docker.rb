@@ -45,7 +45,7 @@ module Vtasks
           docker_tag_major = "#{semver[:major]}"
 
           namespace docker_dir.to_sym do |_args|
-            RSpec::Core::RakeTask.new(spec: [:docker]) do |task|
+            ::RSpec::Core::RakeTask.new(spec: [:docker]) do |task|
               task.pattern = "#{docker_dir}/spec/*_spec.rb"
             end
 

@@ -26,7 +26,7 @@ module Vtasks
 
       desc 'Sync environment with TravisCI'
       task :sync_travis_env do
-        info "Hello #{Travis::User.current.name}!"
+        info "Hello #{::Travis::User.current.name}!"
 
         # Update environment variables
         dotenv.each do |key, value|
@@ -49,11 +49,11 @@ module Vtasks
     end
 
     def env_vars
-      @env_vars ||= Travis::Repository.find(travis_slug).env_vars
+      @env_vars ||= ::Travis::Repository.find(travis_slug).env_vars
     end
 
     def dotenv
-      @dotenv ||= Dotenv.load
+      @dotenv ||= ::Dotenv.load
     end
   end # class TravisCI
 end # module Tasks

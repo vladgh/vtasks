@@ -129,7 +129,7 @@ module Vtasks
     end
 
     def install_modules
-      R10K::CLI.command.run(%w(puppetfile install --verbose))
+      ::R10K::CLI.command.run(%w(puppetfile install --verbose))
     end
 
     def generate_fixtures
@@ -189,8 +189,8 @@ module Vtasks
           # limit. You can make up to 5,000 requests per hour. For unauthenticated
           # requests, the rate limit is only up to 60 requests per hour.
           # (https://developer.github.com/v3/#rate-limiting)
-          tags = if Git::GITHUB_TOKEN
-                   open("https://api.github.com/repos/#{owner}/#{repo}/tags?access_token=#{Git::GITHUB_TOKEN}")
+          tags = if GITHUB_TOKEN
+                   open("https://api.github.com/repos/#{owner}/#{repo}/tags?access_token=#{GITHUB_TOKEN}")
                  else
                    open("https://api.github.com/repos/#{owner}/#{repo}/tags")
                  end
