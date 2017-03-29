@@ -2,19 +2,6 @@ module Vtasks
   require 'rake/tasklib'
 
   # Puppet tasks
-  # Add the following gems to your Gemfile:
-  #     gem 'metadata-json-lint', require: false
-  #     gem 'puppet-lint', require: false
-  #     gem 'puppet-syntax', require: false
-  #     gem 'puppetlabs_spec_helper', require: false
-  #     gem 'rspec-puppet', require: false
-  #     gem 'rspec-puppet-facts', require: false
-  #     gem 'puppet_forge', require: false
-  #     gem 'puppet-strings', require: false
-  #     gem 'r10k', require: false
-  #     gem 'beaker', require: false
-  #     gem 'beaker-puppet_install_helper', require: false
-  #     gem 'beaker-rspec', require: false
   class Puppet < ::Rake::TaskLib
     # Include utility modules
     require 'vtasks/utils/git'

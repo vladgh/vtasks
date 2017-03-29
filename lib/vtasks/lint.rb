@@ -2,10 +2,6 @@ module Vtasks
   require 'rake/tasklib'
 
   # Lint tasks
-  # Add the following gems to your Gemfile:
-  #     gem 'reek', require: false
-  #     gem 'rubocop', require: false
-  #     gem 'rubycritic', require: false
   class Lint < ::Rake::TaskLib
     attr_reader :file_list
 

@@ -4,10 +4,10 @@
 Vlad's collection of Rake tasks
 
 ## Usage
-Consult each class for gem dependencies and add the required gems to the Gemfile:
+See below for gem dependencies and add the required gems to the Gemfile:
 ```ruby
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
-gem 'vtasks', :git => 'https://github.com/vladgh/vtasks'
+gem 'vtasks', :git => 'https://github.com/vladgh/vtasks', require: false
 gem 'example', require: false
 ```
 
@@ -20,6 +20,92 @@ Add the required tasks to the Rakefile:
 ```ruby
 require 'vtasks/example'
 Vtasks::Example.new
+```
+
+### Tasks
+#### Docker
+Required gems:
+```
+gem 'rspec', require: false
+```
+Usage:
+```
+require 'vtasks/docker'
+Vtasks::Docker.new
+```
+#### Lint
+Required gems:
+```
+gem 'reek', require: false
+gem 'rubocop', require: false
+gem 'rubycritic', require: false
+```
+Usage:
+```
+require 'vtasks/lint'
+Vtasks::Lint.new
+```
+```
+require 'vtasks/lint'
+Vtasks::Lint.new(file_list:
+                  FileList[
+                  'lib/**/*.rb',
+                  'spec/**/*.rb',
+                  'Rakefile'
+                ].exclude('spec/fixtures/**/*'))
+```
+#### Puppet
+Required gems:
+```
+gem 'metadata-json-lint', require: false
+gem 'puppet-lint', require: false
+gem 'puppet-syntax', require: false
+gem 'puppetlabs_spec_helper', require: false
+gem 'rspec-puppet', require: false
+gem 'rspec-puppet-facts', require: false
+gem 'puppet_forge', require: false
+gem 'puppet-strings', require: false
+gem 'r10k', require: false
+gem 'beaker', require: false
+gem 'beaker-puppet_install_helper', require: false
+gem 'beaker-rspec', require: false
+```
+Usage:
+```
+require 'vtasks/puppet'
+Vtasks::Puppet.new
+```
+```
+require 'vtasks/puppet'
+Vtasks::Puppet.new(exclude_paths: [
+                    'bundle/**/*',
+                    'modules/**/*',
+                    'pkg/**/*',
+                    'spec/**/*',
+                    'tmp/**/*',
+                    'vendor/**/*'
+                  ])
+```
+#### Release
+Required gems:
+```
+gem 'github_changelog_generator', require: false
+```
+Usage:
+```
+require 'vtasks/release'
+Vtasks::Release.new
+```
+#### TravisCI
+Required gems:
+```
+gem 'dotenv', require: false
+gem 'travis', require: false
+```
+Usage:
+```
+require 'vtasks/travisci'
+Vtasks::TravisCI.new
 ```
 
 ## Development

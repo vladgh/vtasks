@@ -2,8 +2,6 @@ module Vtasks
   require 'rake/tasklib'
 
   # Release tasks
-  # Add the following gems to your Gemfile:
-  #     gem 'github_changelog_generator', require: false
   class Release < ::Rake::TaskLib
     # Include utility modules
     require 'vtasks/utils/git'

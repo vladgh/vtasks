@@ -2,8 +2,6 @@ module Vtasks
   require 'rake/tasklib'
 
   # Docker tasks
-  # Add the following gems to your Gemfile:
-  #     gem 'rspec', require: false
   class Docker < ::Rake::TaskLib
     # Include utility modules
     require 'vtasks/utils/git'

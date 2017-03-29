@@ -2,9 +2,6 @@ module Vtasks
   require 'rake/tasklib'
 
   # Release tasks
-  # Add the following gems to your Gemfile:
-  #     gem 'dotenv', require: false
-  #     gem 'travis', require: false
   class TravisCI < ::Rake::TaskLib
     # Include utility modules
     require 'vtasks/utils/output'
