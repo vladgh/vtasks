@@ -71,12 +71,12 @@ module Vtasks
               sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
 
               info "Tag #{release}"
-              sh "git tag --sign v#{name} --message 'Release v#{name}'"
+              sh "git tag --sign v#{release} --message 'Release v#{release}'"
               sh 'git push --follow-tags'
             end
 
             info "Tag #{release}"
-            sh "git tag --sign v#{name} --message 'Release v#{name}'"
+            sh "git tag --sign v#{release} --message 'Release v#{release}'"
             sh 'git push --follow-tags'
           end # task
         end # LEVELS
