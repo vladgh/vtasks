@@ -27,23 +27,6 @@ module Vtasks
     end
 
     def define_tasks
-      namespace :tag do
-        SEM_LEVELS.each do |level|
-          desc "Tag #{level} version"
-          task level.to_sym do
-            new_version = bump(level)
-            release = "#{new_version[:major]}.#{new_version[:minor]}.#{new_version[:patch]}"
-
-            info 'Check if the repository is clean'
-            git_clean_repo
-
-            info 'Tag release'
-            sh "git tag --sign v#{release} --message 'Release v#{release}'"
-            sh 'git push --follow-tags'
-          end # task
-        end # LEVELS
-      end # namespace :release
-
       namespace :release do
         SEM_LEVELS.each do |level|
           desc "Release #{level} version"
