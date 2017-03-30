@@ -11,7 +11,11 @@ module Vtasks
     require 'vtasks/utils/semver'
     include Vtasks::Utils::Semver
 
-    def initialize
+    attr_reader :write_changelog, :ci_status
+
+    def initialize(options = {})
+      @write_changelog = options.fetch(:write_changelog, false)
+      @ci_status = options.fetch(:ci_status, false)
       define_tasks
     end
 
@@ -52,36 +56,44 @@ module Vtasks
             info 'Check if the repository is clean'
             git_clean_repo
 
-            info 'Create a new release branch'
-            sh "git checkout -b #{release_branch}"
+            if write_changelog == true
+              info 'Create a new release branch'
+              sh "git checkout -b #{release_branch}"
 
-            info 'Generate new changelog'
-            begin
-              require 'github_changelog_generator/task'
-              ::GitHubChangelogGenerator::RakeTask.new(:unreleased) do |config|
-                changelog(config)
+              info 'Generate new changelog'
+              begin
+                require 'github_changelog_generator/task'
+                ::GitHubChangelogGenerator::RakeTask.new(:unreleased) do |config|
+                  changelog(config)
+                end
+              rescue LoadError
+                nil # Might be in a group that is not installed
               end
-            rescue LoadError
-              nil # Might be in a group that is not installed
+              ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
+                changelog(config, release: release)
+              end
+              ::Rake::Task['latest_release'].invoke
+
+              info 'Push the new changes'
+              sh "git commit --gpg-sign --message 'Update change log for v#{release}' CHANGELOG.md"
+              sh "git push --set-upstream origin #{release_branch}"
+
+              if ci_status == true
+                info 'Waiting for CI to finish'
+                sleep 5 until git_ci_status(release_branch) == 'success'
+              end
+
+              info 'Merge release branch'
+              sh "git checkout #{initial_branch}"
+              sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
+
+              info "Tag #{release}"
+              sh "git tag --sign v#{name} --message 'Release v#{name}'"
+              sh 'git push --follow-tags'
             end
-            ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
-              changelog(config, release: release)
-            end
-            ::Rake::Task['latest_release'].invoke
 
-            info 'Push the new changes'
-            sh "git commit --gpg-sign --message 'Update change log for v#{release}' CHANGELOG.md"
-            sh "git push --set-upstream origin #{release_branch}"
-
-            info 'Waiting for CI to finish'
-            sleep 5 until git_ci_status(release_branch) == 'success'
-
-            info 'Merge release branch'
-            sh "git checkout #{initial_branch}"
-            sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
-
-            info 'Tag release'
-            sh "git tag --sign v#{release} --message 'Release v#{release}'"
+            info "Tag #{release}"
+            sh "git tag --sign v#{name} --message 'Release v#{name}'"
             sh 'git push --follow-tags'
           end # task
         end # LEVELS

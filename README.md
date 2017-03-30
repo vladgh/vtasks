@@ -137,6 +137,17 @@ Usage:
 require 'vtasks/release'
 Vtasks::Release.new
 ```
+```
+require 'vtasks/release'
+Vtasks::Release.new(
+  write_changelog: true,
+  ci_status: true
+)
+```
+
+Parameters:
+- `write_changelog`: [Boolean] whether to write the changelog (defaults to `false`)
+- `ci_status`: [Boolean] whether CI status is required (defaults to `false`)
 
 #### TravisCI
 
