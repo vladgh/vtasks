@@ -6,6 +6,10 @@ RSpec::Core::RakeTask.new(:spec)
 # Create a test task
 task :test => :spec
 
+# Release tasks
+require 'vtasks/release'
+Vtasks::Release.new
+
 # Display version
 desc 'Display version'
 task :version do
