@@ -23,23 +23,58 @@ Vtasks::Example.new
 ```
 
 ### Tasks
+
 #### Docker
+
 Required gems:
 ```
+gem 'docker-api', require: false
 gem 'rspec', require: false
+gem 'serverspec', require: false
 ```
+
 Usage:
 ```
 require 'vtasks/docker'
 Vtasks::Docker.new
 ```
+
+Tests (create a `spec/spec_helper.rb` file containing):
+```
+require 'vtasks/docker/shared_context'
+
+# Configura RSpec
+::RSpec.configure do |config|
+  config.formatter = :documentation
+  config.color = true
+  config.tty = true
+end
+
+# Longer build time out
+::Docker.options[:read_timeout] = 7200
+```
+
+And then include the required shared context in your own tests:
+```
+include Vtasks::Docker::SharedContext::Container
+```
+
+Available shared contexts:
+- `Image`: builds an image
+- `CleanUp`: kills all containers and deletes them
+- `Container`: starts a container
+- `RunningEntrypointContainer`: starts a container overriding the entrypoint with a continuous loop
+- `RunningCommandContainer`: starts a container overriding the command with a continuous loop
+
 #### Lint
+
 Required gems:
 ```
 gem 'reek', require: false
 gem 'rubocop', require: false
 gem 'rubycritic', require: false
 ```
+
 Usage:
 ```
 require 'vtasks/lint'
@@ -54,7 +89,9 @@ Vtasks::Lint.new(file_list:
                   'Rakefile'
                 ].exclude('spec/fixtures/**/*'))
 ```
+
 #### Puppet
+
 Required gems:
 ```
 gem 'metadata-json-lint', require: false
@@ -70,6 +107,7 @@ gem 'beaker', require: false
 gem 'beaker-puppet_install_helper', require: false
 gem 'beaker-rspec', require: false
 ```
+
 Usage:
 ```
 require 'vtasks/puppet'
@@ -86,22 +124,28 @@ Vtasks::Puppet.new(exclude_paths: [
                     'vendor/**/*'
                   ])
 ```
+
 #### Release
+
 Required gems:
 ```
 gem 'github_changelog_generator', require: false
 ```
+
 Usage:
 ```
 require 'vtasks/release'
 Vtasks::Release.new
 ```
+
 #### TravisCI
+
 Required gems:
 ```
 gem 'dotenv', require: false
 gem 'travis', require: false
 ```
+
 Usage:
 ```
 require 'vtasks/travisci'
