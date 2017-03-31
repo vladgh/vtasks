@@ -12,9 +12,11 @@ module Vtasks
 
     # Define tasks
     def define_tasks
-      rubocop
-      reek
-      rubycritic
+      namespace :lint do
+        rubocop
+        reek
+        rubycritic
+      end
     end
 
     # RuboCop

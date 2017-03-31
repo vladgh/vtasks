@@ -23,21 +23,23 @@ module Vtasks
         warn 'No suitable github token found'
       end
 
-      desc 'Sync environment with TravisCI'
-      task :sync_travis_env do
-        info "Hello #{::Travis::User.current.name}!"
+      namespace :travis do
+        desc 'Sync environment with TravisCI'
+        task :env do
+          info "Hello #{::Travis::User.current.name}!"
 
-        # Update environment variables
-        dotenv.each do |key, value|
-          info "Updating #{key}"
-          env_vars.upsert(key, value, public: false)
-        end
+          # Update environment variables
+          dotenv.each do |key, value|
+            info "Updating #{key}"
+            env_vars.upsert(key, value, public: false)
+          end
 
-        # Remove remote environment variables
-        env_vars.each do |var|
-          unless dotenv.keys.include?(var.name)
-            warn "Deleting #{var.name}"
-            var.delete
+          # Remove remote environment variables
+          env_vars.each do |var|
+            unless dotenv.keys.include?(var.name)
+              warn "Deleting #{var.name}"
+              var.delete
+            end
           end
         end
       end

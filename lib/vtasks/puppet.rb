@@ -12,42 +12,44 @@ module Vtasks
     attr_reader :exclude_paths
 
     def initialize(options = {})
-      require 'json'
-      require 'metadata-json-lint/rake_task'
-      require 'open-uri'
-      require 'puppet-lint/tasks/puppet-lint'
-      require 'puppet-syntax/tasks/puppet-syntax'
-      require 'puppetlabs_spec_helper/rake_tasks'
-      require 'yaml'
+      namespace :puppet do
+        require 'json'
+        require 'metadata-json-lint/rake_task'
+        require 'open-uri'
+        require 'puppet-lint/tasks/puppet-lint'
+        require 'puppet-syntax/tasks/puppet-syntax'
+        require 'puppetlabs_spec_helper/rake_tasks'
+        require 'yaml'
 
-      begin
-        require 'r10k/cli'
-        require 'r10k/puppetfile'
-      rescue LoadError
-        nil # Might be in a group that is not installed
-      end
+        begin
+          require 'r10k/cli'
+          require 'r10k/puppetfile'
+        rescue LoadError
+          nil # Might be in a group that is not installed
+        end
 
-      begin
-        require 'puppet_blacksmith/rake_tasks'
-      rescue LoadError
-        nil # Might be in a group that is not installed
-      end
+        begin
+          require 'puppet_blacksmith/rake_tasks'
+        rescue LoadError
+          nil # Might be in a group that is not installed
+        end
 
-      begin
-        require 'puppet-strings/tasks'
-      rescue LoadError
-        nil # Might be in a group that is not installed
-      end
+        begin
+          require 'puppet-strings/tasks'
+        rescue LoadError
+          nil # Might be in a group that is not installed
+        end
 
-      begin
-        require 'puppet_forge'
-      rescue LoadError
-        nil # Might be in a group that is not installed
-      end
+        begin
+          require 'puppet_forge'
+        rescue LoadError
+          nil # Might be in a group that is not installed
+        end
 
-      @exclude_paths ||= options.fetch(:exclude_paths) unless options.empty?
+        @exclude_paths ||= options.fetch(:exclude_paths) unless options.empty?
 
-      define_tasks
+        define_tasks
+      end # namespace :puppet
     end
 
     def define_tasks
