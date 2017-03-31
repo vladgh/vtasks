@@ -10,6 +10,10 @@ task :test => :spec
 require 'vtasks/release'
 Vtasks::Release.new
 
+# lint tasks
+require 'vtasks/lint'
+Vtasks::Lint.new
+
 # Display version
 desc 'Display version'
 task :version do
