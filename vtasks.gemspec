@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.0'
   spec.add_development_dependency 'github_changelog_generator', '~> 1.0'
+  spec.add_development_dependency 'faraday', '0.11'
   spec.add_development_dependency 'reek', '~> 4.0'
   spec.add_development_dependency 'rubocop', '~> 0.0'
   spec.add_development_dependency 'rubycritic', '~> 3.0'
