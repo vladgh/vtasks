@@ -25,14 +25,14 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'rake', '~> 12.0'
-  spec.add_runtime_dependency 'rspec', '~> 3.0'
+  spec.add_runtime_dependency 'rake'
+  spec.add_runtime_dependency 'rspec'
 
-  spec.add_development_dependency 'bundler', '~> 1.0'
-  spec.add_development_dependency 'github_changelog_generator', '~> 1.0'
-  spec.add_development_dependency 'faraday', '0.11'
-  spec.add_development_dependency 'reek', '~> 4.0'
-  spec.add_development_dependency 'rubocop', '~> 0.0'
-  spec.add_development_dependency 'rubycritic', '~> 3.0'
-  spec.add_development_dependency 'yard', '~> 0.9'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'github_changelog_generator'
+  spec.add_development_dependency 'faraday', '~> 0.11'
+  spec.add_development_dependency 'reek'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubycritic'
+  spec.add_development_dependency 'yard'
 end
