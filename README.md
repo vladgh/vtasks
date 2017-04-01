@@ -39,6 +39,10 @@ require 'vtasks/docker'
 Vtasks::Docker.new
 ```
 
+Parameters:
+- `:repo`: [String] the docker hub namespace
+- `:has_build_args`: [Boolean] whether build arguments should be used
+
 Tests (create a `spec/spec_helper.rb` file containing):
 ```
 require 'vtasks/utils/docker_shared_context'
