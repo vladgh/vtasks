@@ -12,6 +12,9 @@ module Vtasks
     attr_reader :exclude_paths
 
     def initialize(options = {})
+      # Fix for namespaced :syntax task
+      task syntax: ['puppet:syntax']
+
       namespace :puppet do
         require 'json'
         require 'metadata-json-lint/rake_task'
