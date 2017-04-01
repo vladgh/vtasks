@@ -1,6 +1,7 @@
 module Vtasks
-module Docker
-module SharedContext
+module Utils
+# DockerSharedContext module
+module DockerSharedContext
   require 'rspec/core'
 
   begin
@@ -85,7 +86,6 @@ module SharedContext
 
     include CleanUp
   end
-
-end # module SharedContext
-end # module Docker
+end # module DockerSharedContext
+end # module Utils
 end # module Vtasks

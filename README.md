@@ -41,7 +41,7 @@ Vtasks::Docker.new
 
 Tests (create a `spec/spec_helper.rb` file containing):
 ```
-require 'vtasks/docker/shared_context'
+require 'vtasks/utils/docker_shared_context'
 
 # Configura RSpec
 ::RSpec.configure do |config|
@@ -56,7 +56,7 @@ end
 
 And then include the required shared context in your own tests:
 ```
-include Vtasks::Docker::SharedContext::Container
+include Vtasks::Utils::DockerSharedContext::Container
 ```
 
 Available shared contexts:
