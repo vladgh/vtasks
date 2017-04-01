@@ -29,5 +29,5 @@ task :contributors do
 end
 
 task :default do
-  system 'rake -D'
+  system 'rake -T'
 end
