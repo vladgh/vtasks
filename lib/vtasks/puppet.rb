@@ -57,8 +57,6 @@ module Vtasks
 
     def define_tasks
       # Must clear as it will not override the existing puppet-lint rake task
-      ::Rake::Task[:lint].clear
-      ::Rake::Task[:rubocop].clear
       ::PuppetLint::RakeTask.new :lint do |config|
         config.relative = true
         config.with_context = true
