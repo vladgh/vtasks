@@ -94,6 +94,22 @@ Vtasks::Lint.new(file_list:
                 ].exclude('spec/fixtures/**/*'))
 ```
 
+Rubocop can be configured by using a `.rubocop.yml` file at the root of the project (https://github.com/bbatsov/rubocop). Ex.:
+```
+AllCops:
+  Exclude:
+    # Ignore HTML related things
+    - '**/*.erb'
+    # Ignore vendored gems
+    - 'vendor/**/*'
+    # Ignore code from test fixtures
+    - 'spec/fixtures/**/*'
+    # Ignore temporary code
+    - 'tmp/**/*'
+Metrics/LineLength:
+  Enabled: false
+```
+
 #### Puppet
 
 Required gems:
