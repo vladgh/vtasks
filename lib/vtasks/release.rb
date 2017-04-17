@@ -28,6 +28,20 @@ module Vtasks
 
     def define_tasks
       namespace :release do
+        begin
+          require 'github_changelog_generator/task'
+        rescue LoadError
+          nil # Might be in a group that is not installed
+        end
+
+        ::GitHubChangelogGenerator::RakeTask.new(:unreleased) do |config|
+            changelog(config)
+        end
+
+        ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
+          changelog(config, release: release)
+        end
+
         SEM_LEVELS.each do |level|
           desc "Release #{level} version"
           task level.to_sym do
@@ -44,18 +58,7 @@ module Vtasks
               sh "git checkout -b #{release_branch}"
 
               info 'Generate new changelog'
-              begin
-                require 'github_changelog_generator/task'
-                ::GitHubChangelogGenerator::RakeTask.new(:unreleased) do |config|
-                  changelog(config)
-                end
-              rescue LoadError
-                nil # Might be in a group that is not installed
-              end
-              ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
-                changelog(config, release: release)
-              end
-              ::Rake::Task['latest_release'].invoke
+              task('latest_release').invoke
 
               info 'Push the new changes'
               sh "git commit --gpg-sign --message 'Update change log for v#{release}' CHANGELOG.md"
