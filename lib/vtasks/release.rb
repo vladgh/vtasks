@@ -34,12 +34,9 @@ module Vtasks
           nil # Might be in a group that is not installed
         end
 
+        # Create unreleased task
         ::GitHubChangelogGenerator::RakeTask.new(:unreleased) do |config|
             changelog(config)
-        end
-
-        ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
-          changelog(config, release: release)
         end
 
         SEM_LEVELS.each do |level|
@@ -49,6 +46,11 @@ module Vtasks
             release = "#{new_version[:major]}.#{new_version[:minor]}.#{new_version[:patch]}"
             release_branch = "release_v#{release.gsub(/[^0-9A-Za-z]/, '_')}"
             initial_branch = git_branch
+
+            # Create a release task
+            ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
+              changelog(config, release: release)
+            end
 
             info 'Check if the repository is clean'
             git_clean_repo
