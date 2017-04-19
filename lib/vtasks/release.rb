@@ -30,13 +30,13 @@ module Vtasks
       namespace :release do
         begin
           require 'github_changelog_generator/task'
+
+          # Create unreleased task
+          ::GitHubChangelogGenerator::RakeTask.new(:unreleased) do |config|
+              changelog(config)
+          end
         rescue LoadError
           nil # Might be in a group that is not installed
-        end
-
-        # Create unreleased task
-        ::GitHubChangelogGenerator::RakeTask.new(:unreleased) do |config|
-            changelog(config)
         end
 
         SEM_LEVELS.each do |level|
