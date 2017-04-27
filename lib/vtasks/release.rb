@@ -59,8 +59,9 @@ module Vtasks
               end
               task('latest_release').invoke
 
-              # Skip this if CHANGELOG has not changed
               if system 'git diff --quiet HEAD'
+                info 'CHANGELOG has not changed. Skipping...'
+              else
                 info 'Create a new release branch'
                 sh "git checkout -b #{release_branch}"
 
