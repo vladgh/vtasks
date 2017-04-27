@@ -11,11 +11,10 @@ module Vtasks
     require 'vtasks/utils/semver'
     include Vtasks::Utils::Semver
 
-    attr_reader :write_changelog, :use_release_branch, :wait_for_ci_success
+    attr_reader :write_changelog, :wait_for_ci_success
 
     def initialize(options = {})
       @write_changelog = options.fetch(:write_changelog, false)
-      @use_release_branch = options.fetch(:use_release_branch, false)
       @wait_for_ci_success = options.fetch(:wait_for_ci_success, false)
       define_tasks
     end
@@ -56,11 +55,11 @@ module Vtasks
             info 'Check if the repository is clean'
             git_clean_repo
 
+            # Write changelog
+            # Create a separate release branch (works with  protected branches as well)
             if write_changelog == true
-              if use_release_branch == true
-                info 'Create a new release branch'
-                sh "git checkout -b #{release_branch}"
-              end
+              info 'Create a new release branch'
+              sh "git checkout -b #{release_branch}"
 
               info 'Generate new changelog'
               task('latest_release').invoke
@@ -68,21 +67,17 @@ module Vtasks
               info 'Commit the new changes'
               sh "git commit --gpg-sign --message 'Update change log for v#{release}' CHANGELOG.md"
 
-              if use_release_branch == true
-                info 'Push the new changes'
-                sh "git push --set-upstream origin #{release_branch}"
-              end
+              info 'Push the new changes'
+              sh "git push --set-upstream origin #{release_branch}"
 
               if wait_for_ci_success == true
                 info 'Waiting for CI to finish'
                 sleep 5 until git_ci_status(release_branch) == 'success'
               end
 
-              if use_release_branch == true
-                info 'Merge release branch'
-                sh "git checkout #{initial_branch}"
-                sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
-              end
+              info 'Merge release branch'
+              sh "git checkout #{initial_branch}"
+              sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
             end
 
             info "Tag #{release}"
