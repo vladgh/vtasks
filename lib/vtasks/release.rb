@@ -53,29 +53,32 @@ module Vtasks
             # Write changelog
             # Create a separate release branch (works with  protected branches as well)
             if write_changelog == true
-              info 'Create a new release branch'
-              sh "git checkout -b #{release_branch}"
-
               info 'Generate new changelog'
               ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
                 changelog(config, release: release)
               end
               task('latest_release').invoke
 
-              info 'Commit the new changes'
-              sh "git commit --gpg-sign --message 'Update change log for v#{release}' CHANGELOG.md"
+              # Skip this if CHANGELOG has not changed
+              if system 'git diff --quiet HEAD'
+                info 'Create a new release branch'
+                sh "git checkout -b #{release_branch}"
 
-              info 'Push the new changes'
-              sh "git push --set-upstream origin #{release_branch}"
+                info 'Commit the new changes'
+                sh "git commit --gpg-sign --message 'Update change log for v#{release}' CHANGELOG.md"
 
-              if wait_for_ci_success == true
-                info 'Waiting for CI to finish'
-                sleep 5 until git_ci_status(release_branch) == 'success'
+                info 'Push the new changes'
+                sh "git push --set-upstream origin #{release_branch}"
+
+                if wait_for_ci_success == true
+                  info 'Waiting for CI to finish'
+                  sleep 5 until git_ci_status(release_branch) == 'success'
+                end
+
+                info 'Merge release branch'
+                sh "git checkout #{initial_branch}"
+                sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
               end
-
-              info 'Merge release branch'
-              sh "git checkout #{initial_branch}"
-              sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
             end
 
             info "Tag #{release}"
