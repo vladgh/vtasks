@@ -8,7 +8,9 @@ task :test => :spec
 
 # Release tasks
 require 'vtasks/release'
-Vtasks::Release.new
+Vtasks::Release.new(
+  write_changelog: true
+)
 
 # lint tasks
 require 'vtasks/lint'
