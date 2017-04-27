@@ -47,11 +47,6 @@ module Vtasks
             release_branch = "release_v#{release.gsub(/[^0-9A-Za-z]/, '_')}"
             initial_branch = git_branch
 
-            # Create a release task
-            ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
-              changelog(config, release: release)
-            end
-
             info 'Check if the repository is clean'
             git_clean_repo
 
@@ -62,6 +57,9 @@ module Vtasks
               sh "git checkout -b #{release_branch}"
 
               info 'Generate new changelog'
+              ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
+                changelog(config, release: release)
+              end
               task('latest_release').invoke
 
               info 'Commit the new changes'
