@@ -11,18 +11,23 @@ module Vtasks
     require 'vtasks/utils/semver'
     include Vtasks::Utils::Semver
 
-    attr_reader :write_changelog, :wait_for_ci_success
+    attr_reader :write_changelog,
+                :wait_for_ci_success,
+                :bug_labels,
+                :enhancement_labels
 
     def initialize(options = {})
       @write_changelog = options.fetch(:write_changelog, false)
       @wait_for_ci_success = options.fetch(:wait_for_ci_success, false)
+      @bug_labels = options.fetch(:bug_labels, 'bug')
+      @enhancement_labels = options.fetch(:enhancement_labels, 'enhancement')
       define_tasks
     end
 
     # Configure the github_changelog_generator/task
     def changelog(config, release: nil)
-      config.bug_labels         = 'Type: Bug'
-      config.enhancement_labels = 'Type: Enhancement'
+      config.bug_labels         = bug_labels #'Type: Bug'
+      config.enhancement_labels = enhancement_labels #'Type: Enhancement'
       config.future_release     = "v#{release}" if release
     end
 
