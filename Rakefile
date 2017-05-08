@@ -9,7 +9,9 @@ task :test => :spec
 # Release tasks
 require 'vtasks/release'
 Vtasks::Release.new(
-  write_changelog: true
+  write_changelog: true,
+  bug_labels: 'Type: Bug',
+  enhancement_labels: 'Type: Enhancement'
 )
 
 # lint tasks
