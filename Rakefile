@@ -1,10 +1,13 @@
-require "bundler/gem_tasks"
-
 require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new(:spec)
 
 # Create a test task
 task :test => :spec
+
+# Separate bundler gems
+namespace :bundler do
+  require "bundler/gem_tasks"
+end
 
 # Release tasks
 require 'vtasks/release'
