@@ -32,12 +32,15 @@ module Vtasks
     end
 
     def define_tasks
+      desc "Release patch version"
+      task release: ['release:patch']
+
       namespace :release do
         begin
           require 'github_changelog_generator/task'
 
-          # Create unreleased task
-          ::GitHubChangelogGenerator::RakeTask.new(:unreleased) do |config|
+          # Create release:changes task
+          ::GitHubChangelogGenerator::RakeTask.new(:changes) do |config|
               changelog(config)
           end
         rescue LoadError
