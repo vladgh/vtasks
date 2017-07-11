@@ -99,9 +99,9 @@ module Vtasks
     # Garbage collect
     def garbage_collect
       namespace :docker do
-        desc 'Garbage collect unused docker filesystem layers'
+        desc 'Garbage collect unused docker data'
         task gc: :docker do
-          system 'docker image prune'
+          system 'docker system prune --all --force'
         end
       end
     end
