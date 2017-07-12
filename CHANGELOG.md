@@ -1,5 +1,20 @@
 # Change Log
 
+## [v0.0.7](https://github.com/vladgh/vtasks/tree/v0.0.7) (2017-07-12)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.6...v0.0.7)
+
+**Implemented enhancements:**
+
+- Improve docker tasks [\#6](https://github.com/vladgh/vtasks/issues/6)
+- Improve docker garbage collect task [\#5](https://github.com/vladgh/vtasks/issues/5)
+- Adhere to recommended community standards [\#4](https://github.com/vladgh/vtasks/issues/4)
+- Put bundler rake tasks into their own namespace [\#3](https://github.com/vladgh/vtasks/issues/3)
+- Improve release namespace [\#2](https://github.com/vladgh/vtasks/issues/2)
+- Update options for the release task [\#1](https://github.com/vladgh/vtasks/pull/1) ([vladgh](https://github.com/vladgh))
+
+## [v0.0.6](https://github.com/vladgh/vtasks/tree/v0.0.6) (2017-04-27)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.5...v0.0.6)
+
 ## [v0.0.5](https://github.com/vladgh/vtasks/tree/v0.0.5) (2017-04-17)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.4...v0.0.5)
 
