@@ -2,18 +2,27 @@ module Vtasks
 class Docker
 class Image
 # Docker Build class
-class Build < Image
+class Build
   # Include utility modules
   require 'vtasks/utils/git'
   include Vtasks::Utils::Git
+  require 'vtasks/utils/output'
+  include Vtasks::Utils::Output
 
-  attr_reader :image, :path
+  attr_reader :image, :path, :build_date, :build_tag
 
-  def initialize(image, path)
-    @image ||= image
-    @path  ||= path
+  def initialize(image, path, args={})
+    @image      ||= image
+    @path       ||= path
+    @build_date ||= args.fetch(:build_date)
+    @build_tag  ||= args.fetch(:build_tag)
 
     @cmd = 'docker image build'
+  end
+
+  def without_arguments
+    info "Building #{image}:#{build_tag}"
+    system "#{@cmd} -t #{image}:#{build_tag} #{path}"
   end
 
   def with_arguments
@@ -31,10 +40,6 @@ class Build < Image
     without_arguments
   end
 
-  def without_arguments
-    info "Building #{image}:#{build_tag}"
-    system "#{@cmd} -t #{image}:#{build_tag} #{path}"
-  end
 end # class Build
 end # class Image
 end # class Docker

@@ -39,14 +39,23 @@ module Vtasks
     def add_namespace(image, path)
       namespace path.to_sym do |_args|
         require 'rspec/core/rake_task'
-        ::RSpec::Core::RakeTask.new(spec: [:docker]) do |task|
+        ::RSpec::Core::RakeTask.new(:spec) do |task|
           task.pattern = "#{path}/spec/*_spec.rb"
         end
 
         docker_image = Vtasks::Docker::Image.new(image, path, args)
-        docker_image.lint
-        docker_image.build_with_tags
-        docker_image.push
+
+        lint_image(path)
+
+        desc 'Build and tag docker image'
+        task :build do
+          docker_image.build_with_tags
+        end
+
+        desc 'Publish docker image'
+        task :push do
+          docker_image.push
+        end
       end
     end
 
@@ -88,21 +97,27 @@ module Vtasks
 
     # List all images
     def list_images
-      namespace :docker do
-        desc 'List all Docker images'
-        task :list do
-          info dockerfiles.map { |image| File.basename(image) }
-        end
+      desc 'List all Docker images'
+      task :list do
+        info dockerfiles.map { |image| File.basename(image) }
+      end
+    end
+
+    # Lint image
+    def lint_image(path)
+      desc 'Run Hadolint against the Dockerfile'
+      task :lint do
+        dockerfile = "#{path}/Dockerfile"
+        info "Running Hadolint to check the style of #{dockerfile}"
+        system "docker container run --rm -i lukasmartinelli/hadolint hadolint --ignore DL3008 --ignore DL3013 - < #{dockerfile}"
       end
     end
 
     # Garbage collect
     def garbage_collect
-      namespace :docker do
-        desc 'Garbage collect unused docker data'
-        task gc: :docker do
-          system 'docker system prune --all --force'
-        end
+      desc 'Garbage collect unused docker data'
+      task :gc do
+        system 'docker system prune --all --force'
       end
     end
   end # class Docker
