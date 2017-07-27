@@ -49,7 +49,17 @@ module Vtasks
           nil # Might be in a group that is not installed
         end
 
-        @exclude_paths ||= options.fetch(:exclude_paths) unless options.empty?
+        @exclude_paths ||= options.fetch(
+          :exclude_paths,
+          [
+            'bundle/**/*',
+            'modules/**/*',
+            'pkg/**/*',
+            'spec/**/*',
+            'tmp/**/*',
+            'vendor/**/*'
+          ]
+        )
 
         define_tasks
       end # namespace :puppet
