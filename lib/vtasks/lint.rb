@@ -12,6 +12,9 @@ module Vtasks
 
     # Define tasks
     def define_tasks
+      desc 'Check for code smells with Reek and Rubocop'
+      task lint: ['lint:reek', 'lint:rubocop']
+
       namespace :lint do
         rubocop
         reek

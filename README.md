@@ -135,15 +135,10 @@ Vtasks::Puppet.new
 ```
 ```
 require 'vtasks/puppet'
-Vtasks::Puppet.new(exclude_paths: [
-                    'bundle/**/*',
-                    'modules/**/*',
-                    'pkg/**/*',
-                    'spec/**/*',
-                    'tmp/**/*',
-                    'vendor/**/*'
-                  ])
+Vtasks::Puppet.new
 ```
+
+**_Note_: The `puppetlabs_spec_helper` gem clears the default `lint` task, so this needs to be called before all the lint tasks.**
 
 #### Release
 
