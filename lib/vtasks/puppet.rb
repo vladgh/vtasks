@@ -66,7 +66,6 @@ module Vtasks
     end
 
     def define_tasks
-      # Must clear as it will not override the existing puppet-lint rake task
       ::PuppetLint::RakeTask.new :lint do |config|
         config.relative = true
         config.with_context = true
@@ -90,6 +89,7 @@ module Vtasks
 
       desc 'Run unit tests'
       task unit: [
+        :r10k_install_modules,
         :spec_prep,
         :spec_standalone
       ]
@@ -104,8 +104,8 @@ module Vtasks
       task clean: [:spec_clean]
 
       desc 'Use R10K to download all modules'
-      task :install_modules do
-        install_modules
+      task :r10k_install_modules do
+        r10k_install_modules
       end
 
       desc 'Generates a new .fixtures.yml from a Puppetfile'
@@ -128,8 +128,11 @@ module Vtasks
       error 'Puppetfile was not found or is empty!' if puppetfile.modules.empty?
     end
 
-    def install_modules
+    def r10k_install_modules
+      info 'Updating modules with R10K'
       ::R10K::CLI.command.run(%w(puppetfile install --verbose))
+    rescue SystemExit # because R10K::CLI.command.run calls `exit 0`
+      info 'Modules have been updated'
     end
 
     def generate_fixtures
