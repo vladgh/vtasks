@@ -12,10 +12,8 @@ module Vtasks
     end
 
     def define_tasks
-      # Include libraries
-      require 'dotenv'
-
       begin
+        require 'dotenv'
         require 'travis/auto_login'
       rescue LoadError
         nil # Might be in a group that is not installed

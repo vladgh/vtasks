@@ -16,34 +16,18 @@ module Vtasks
       task syntax: ['puppet:syntax']
 
       namespace :puppet do
-        require 'json'
-        require 'metadata-json-lint/rake_task'
-        require 'open-uri'
-        require 'puppet-lint/tasks/puppet-lint'
-        require 'puppet-syntax/tasks/puppet-syntax'
-        require 'puppetlabs_spec_helper/rake_tasks'
-        require 'yaml'
-
         begin
+          require 'json'
+          require 'metadata-json-lint/rake_task'
+          require 'open-uri'
+          require 'puppet-lint/tasks/puppet-lint'
+          require 'puppet-syntax/tasks/puppet-syntax'
+          require 'puppetlabs_spec_helper/rake_tasks'
+          require 'yaml'
           require 'r10k/cli'
           require 'r10k/puppetfile'
-        rescue LoadError
-          nil # Might be in a group that is not installed
-        end
-
-        begin
           require 'puppet_blacksmith/rake_tasks'
-        rescue LoadError
-          nil # Might be in a group that is not installed
-        end
-
-        begin
           require 'puppet-strings/tasks'
-        rescue LoadError
-          nil # Might be in a group that is not installed
-        end
-
-        begin
           require 'puppet_forge'
         rescue LoadError
           nil # Might be in a group that is not installed

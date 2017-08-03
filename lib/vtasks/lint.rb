@@ -24,7 +24,11 @@ module Vtasks
 
     # RuboCop
     def rubocop
-      require 'rubocop/rake_task'
+      begin
+        require 'rubocop/rake_task'
+      rescue LoadError
+        nil # Might be in a group that is not installed
+      end
       desc 'Run RuboCop on the tasks and lib directory'
       ::RuboCop::RakeTask.new(:rubocop) do |task|
         task.patterns = file_list
@@ -34,7 +38,11 @@ module Vtasks
 
     # Reek
     def reek
-      require 'reek/rake/task'
+      begin
+        require 'reek/rake/task'
+      rescue LoadError
+        nil # Might be in a group that is not installed
+      end
       ::Reek::Rake::Task.new do |task|
         task.source_files  = file_list
         task.fail_on_error = false
@@ -44,7 +52,11 @@ module Vtasks
 
     # Ruby Critic
     def rubycritic
-      require 'rubycritic/rake_task'
+      begin
+        require 'rubycritic/rake_task'
+      rescue LoadError
+        nil # Might be in a group that is not installed
+      end
       ::RubyCritic::RakeTask.new do |task|
         task.paths = file_list
       end
