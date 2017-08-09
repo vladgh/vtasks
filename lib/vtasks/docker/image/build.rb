@@ -21,6 +21,9 @@ class Build
   end
 
   def without_arguments
+    info "Pulling #{image}" # to speed up the building process
+    system "docker pull #{image}" unless ENV['DOCKER_NO_CACHE']
+
     info "Building #{image}:#{build_tag}"
     system "#{@cmd} -t #{image}:#{build_tag} #{path}"
   end
