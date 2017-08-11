@@ -23,6 +23,22 @@ module Output
     def yellow
       colorize(33)
     end
+
+    def white
+      colorize(37)
+    end
+
+    def bold
+      colorize(1)
+    end
+
+    def italic
+      colorize(3)
+    end
+
+    def underline
+      colorize(4)
+    end
   end
 
   # Add colorize to the String class
