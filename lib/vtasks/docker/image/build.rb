@@ -26,6 +26,11 @@ class Build
 
     info "Building #{image}:#{build_tag}"
     system "#{@cmd} -t #{image}:#{build_tag} #{path}"
+
+    if $?.exitstatus != 0
+      error 'Build command failed!'
+      abort
+    end
   end
 
   def with_arguments
