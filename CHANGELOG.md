@@ -1,5 +1,23 @@
 # Change Log
 
+## [v0.0.8](https://github.com/vladgh/vtasks/tree/v0.0.8) (2017-11-08)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.7...v0.0.8)
+
+**Implemented enhancements:**
+
+- Add more styles to Output [\#12](https://github.com/vladgh/vtasks/issues/12)
+- Pull the image from the registry before building [\#11](https://github.com/vladgh/vtasks/issues/11)
+- Create a general `lint` task [\#9](https://github.com/vladgh/vtasks/issues/9)
+- Use R10K to install test modules [\#8](https://github.com/vladgh/vtasks/issues/8)
+- Add default paths to be excluded in the puppet task  [\#7](https://github.com/vladgh/vtasks/issues/7)
+- Switch to new Bundler file names [\#14](https://github.com/vladgh/vtasks/pull/14) ([vladgh](https://github.com/vladgh))
+- Rescue gem requires [\#10](https://github.com/vladgh/vtasks/pull/10) ([vladgh](https://github.com/vladgh))
+
+**Fixed bugs:**
+
+- R10K sets the wrong locales \(maybe\) [\#15](https://github.com/vladgh/vtasks/issues/15)
+- Docker build task should stop if build fails [\#13](https://github.com/vladgh/vtasks/issues/13)
+
 ## [v0.0.7](https://github.com/vladgh/vtasks/tree/v0.0.7) (2017-07-12)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.6...v0.0.7)
 
