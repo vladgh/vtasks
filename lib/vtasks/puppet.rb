@@ -12,6 +12,12 @@ module Vtasks
     attr_reader :exclude_paths
 
     def initialize(options = {})
+      # Fix for
+      # NoMethodError: undefined method `map' for true:TrueClass
+      # .../gems/fast_gettext-1.1.0/lib/fast_gettext/storage.rb:31:in `available_locales'
+      require 'fast_gettext'
+      FastGettext.available_locales = ['de','en','fr','en_US','en_UK']
+
       # Fix for namespaced :syntax task
       task syntax: ['puppet:syntax']
 
