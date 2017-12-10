@@ -120,7 +120,7 @@ module Vtasks
 
     def r10k_install_modules
       info 'Updating modules with R10K'
-      ::R10K::CLI.command.run(%w(puppetfile install --verbose))
+      ::R10K::CLI.command.run(%w(puppetfile install --force --verbose))
     rescue SystemExit # because R10K::CLI.command.run calls `exit 0`
       info 'Modules have been updated'
     end
