@@ -164,6 +164,13 @@ Parameters:
 - `write_changelog`: [Boolean] whether to write the changelog (defaults to `false`)
 - `ci_status`: [Boolean] whether CI status is required (defaults to `false`)
 
+Note:
+First time you have to create an annotated tag and commit the initial CHANGELOG, before creating issues or pull requests (if there these are not present it will fail)
+```
+git tag --sign v0.0.0 --message 'Release v0.0.0' && git push --follow-tags
+bundle exec rake release:changes
+```
+
 #### TravisCI
 
 Required gems:
