@@ -6,3 +6,8 @@ branches:
   - "/^v\\d/"
 install: bundle install --path vendor/bundle
 script: bundle exec rake spec
+notifications:
+  webhooks:
+    urls: https://vbot.ghn.me/travis
+  slack:
+    secure: nmENWp/oIC3J3YS2BPms8jngqCc7kodjEtpfxUK1LttlPwpIWY3VBdVEeQ1oCX2/vO4iJLHOf0N+v09Q/aCJFPmEbpcfq5/Yl6t6P8Qa85wYERQa82O7VdSmRK03EEAGff5/ZN21IkE0+T5vx9XcwY+e9aJWbfqst/5MzAcQelu7p20thsdp5CdHt6EtmrFdJv97HbJgLbdZ8TnJZaFMmALo3vNbakZQ91uTBLsjyT5vZdhDL2T4Cz1vfkhgerxxI/bk6JcToDxvJxghEeJAI1sKI9xWxZMNrPJsh7lMBvglQdf9BUn5aLZuB5lHurpYa0sVxLioZdixtodlSHife+NZDKaq3dthkH9nCgwpk8OTPvy4C36RT4QRHcGIBf5153t8foy0L8ipdneLTVGqVYU0u492Zvy1JKkTMXLKlRulNwPD7MqdQjChHf/LAujB0NGOs5hPjPgmBJNtF9SYmEsNUc2+T/jO7eWnfEVjB9PoZv2x1kpuz2Gkdt7ePw2dd7RRRkTaZIrzEq/Da8yE6oSJn8c0vfPxGe+VWguF6GnqfIAbm84Okr+vRD/Do/hmyTbk+pek5vQ4pTAKNILzx8KlORRbXqERb2Dzb2iSkf3/UXDoSV8s4AoX8oSmf7c6xaETZjK8RvzZaVvS7JboTDCHL4CvujwQKH+q6W2yOMw=
