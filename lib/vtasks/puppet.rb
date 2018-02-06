@@ -9,32 +9,27 @@ module Vtasks
     require 'vtasks/utils/output'
     include Vtasks::Utils::Output
 
+    require 'json'
+    require 'open-uri'
+    require 'yaml'
+
     attr_reader :exclude_paths
 
     def initialize(options = {})
-      # Fix for
-      # NoMethodError: undefined method `map' for true:TrueClass
-      # .../gems/fast_gettext-1.1.0/lib/fast_gettext/storage.rb:31:in `available_locales'
-      require 'fast_gettext'
-      FastGettext.available_locales = ['de','en','fr','en_US','en_UK']
-
       # Fix for namespaced :syntax task
       task syntax: ['puppet:syntax']
 
       namespace :puppet do
         begin
-          require 'json'
-          require 'metadata-json-lint/rake_task'
-          require 'open-uri'
-          require 'puppet-lint/tasks/puppet-lint'
-          require 'puppet-syntax/tasks/puppet-syntax'
-          require 'puppetlabs_spec_helper/rake_tasks'
-          require 'yaml'
           require 'r10k/cli'
           require 'r10k/puppetfile'
-          require 'puppet_blacksmith/rake_tasks'
-          require 'puppet-strings/tasks'
           require 'puppet_forge'
+          require 'metadata-json-lint/rake_task'
+          require 'puppet-syntax/tasks/puppet-syntax'
+          require 'puppet-lint/tasks/puppet-lint'
+          require 'puppet-strings/tasks'
+          require 'puppet_blacksmith/rake_tasks'
+          require 'puppetlabs_spec_helper/rake_tasks' # IT'S IMPORTANT TO BE LAST BECAUSE OF FAST_GETTEXT INITIALIZATION
         rescue LoadError
           nil # Might be in a group that is not installed
         end
