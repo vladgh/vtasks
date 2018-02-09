@@ -24,12 +24,12 @@ module Vtasks
           require 'r10k/cli'
           require 'r10k/puppetfile'
           require 'puppet_forge'
+          require 'puppetlabs_spec_helper/rake_tasks' # ORDER IS VERY IMPORTANT BECAUSE IT OVERRIDES A LOT OF OTHER TASKS; AS OF NOW IT NEEDS TO BE AFTER `r10k` and `puppet_forge` (BECAUSE OF FAST_GETTEXT INITIALIZATION) BUT BEFORE puppet-strings (BECAUSE ERROR: `Don't know how to build task 'spec_prep'`)
           require 'metadata-json-lint/rake_task'
           require 'puppet-syntax/tasks/puppet-syntax'
           require 'puppet-lint/tasks/puppet-lint'
           require 'puppet-strings/tasks'
           require 'puppet_blacksmith/rake_tasks'
-          require 'puppetlabs_spec_helper/rake_tasks' # IT'S IMPORTANT TO BE LAST BECAUSE OF FAST_GETTEXT INITIALIZATION
         rescue LoadError
           nil # Might be in a group that is not installed
         end
