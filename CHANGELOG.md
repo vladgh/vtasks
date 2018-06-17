@@ -1,6 +1,13 @@
 # Change Log
 
-## [v0.0.10](https://github.com/vladgh/vtasks/tree/v0.0.10) (2018-06-16)
+## [v0.0.11](https://github.com/vladgh/vtasks/tree/v0.0.11) (2018-06-16)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.10...v0.0.11)
+
+**Fixed bugs:**
+
+- Fix Travis errors [\#22](https://github.com/vladgh/vtasks/issues/22)
+
+## [v0.0.10](https://github.com/vladgh/vtasks/tree/v0.0.10) (2018-06-17)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.9...v0.0.10)
 
 **Fixed bugs:**
