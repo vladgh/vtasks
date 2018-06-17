@@ -1,6 +1,13 @@
 # Change Log
 
-## [v0.0.9](https://github.com/vladgh/vtasks/tree/v0.0.9) (2018-06-16)
+## [v0.0.10](https://github.com/vladgh/vtasks/tree/v0.0.10) (2018-06-16)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.9...v0.0.10)
+
+**Fixed bugs:**
+
+- Allow release from tags [\#21](https://github.com/vladgh/vtasks/issues/21)
+
+## [v0.0.9](https://github.com/vladgh/vtasks/tree/v0.0.9) (2018-06-17)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.8...v0.0.9)
 
 **Implemented enhancements:**
