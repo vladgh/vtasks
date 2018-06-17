@@ -1,9 +1,6 @@
 dist: trusty
 group: travis_latest
 language: ruby
-branches:
-  except:
-  - "/^v\\d/"
 install: bundle install --path vendor/bundle
 script: bundle exec rake spec
 notifications:
