@@ -1,5 +1,19 @@
 # Change Log
 
+## [v0.0.9](https://github.com/vladgh/vtasks/tree/v0.0.9) (2018-06-16)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.8...v0.0.9)
+
+**Implemented enhancements:**
+
+- Deploy to RubyGems [\#20](https://github.com/vladgh/vtasks/issues/20)
+- Use the latest TravisCI environment [\#17](https://github.com/vladgh/vtasks/issues/17)
+- R10k should overwrite local modifications [\#16](https://github.com/vladgh/vtasks/issues/16)
+
+**Fixed bugs:**
+
+- Fix puppetlabs\_spec\_helper load order [\#19](https://github.com/vladgh/vtasks/issues/19)
+- Fix fast\_gettext error [\#18](https://github.com/vladgh/vtasks/issues/18)
+
 ## [v0.0.8](https://github.com/vladgh/vtasks/tree/v0.0.8) (2017-11-08)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.7...v0.0.8)
 
