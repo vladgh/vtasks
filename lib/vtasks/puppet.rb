@@ -162,7 +162,7 @@ module Vtasks
           installed_version = mod.expected_version
           if installed_version != forge_version
             puts "#{module_name} is OUTDATED: " \
-              "#{installed_version} vs #{forge_version}"
+              "#{installed_version} vs #{forge_version} (#{::PuppetForge::Module.find(module_name).current_release.metadata[:project_page]})"
               .red
           else
             puts "#{module_name}: #{forge_version}".green
@@ -197,10 +197,10 @@ module Vtasks
           # Print results
           installed_version = mod.version.gsub(/[v]?(.*)/, '\\1')
           if installed_version == 'master'
-            puts "#{mod.title}: 'master' branch (#{latest_tag})".blue
+            puts "#{mod.title}: 'master' branch (#{latest_tag}) - #{remote}".blue
           elsif installed_version != latest_tag
             puts "#{mod.title} is OUTDATED: " \
-              "#{installed_version} vs #{latest_tag}"
+              "#{installed_version} vs #{latest_tag} (#{remote})"
               .red
           else
             puts "#{mod.title}: #{latest_tag}".green
