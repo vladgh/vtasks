@@ -1,6 +1,13 @@
 # Change Log
 
-## [v0.0.11](https://github.com/vladgh/vtasks/tree/v0.0.11) (2018-06-16)
+## [v0.0.12](https://github.com/vladgh/vtasks/tree/v0.0.12) (2018-10-11)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.11...v0.0.12)
+
+**Implemented enhancements:**
+
+- Add repository url to the output of outdated modules [\#23](https://github.com/vladgh/vtasks/issues/23)
+
+## [v0.0.11](https://github.com/vladgh/vtasks/tree/v0.0.11) (2018-06-17)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.10...v0.0.11)
 
 **Fixed bugs:**
