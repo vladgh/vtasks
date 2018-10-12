@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.0.14](https://github.com/vladgh/vtasks/tree/v0.0.14) (2018-10-12)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.13...v0.0.14)
+
+**Implemented enhancements:**
+
+- Remove intermediary git push [\#26](https://github.com/vladgh/vtasks/issues/26)
+
 ## [v0.0.13](https://github.com/vladgh/vtasks/tree/v0.0.13) (2018-10-12)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.12...v0.0.13)
 
