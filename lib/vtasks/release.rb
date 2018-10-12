@@ -66,7 +66,6 @@ module Vtasks
             git_clean_repo
 
             # Write changelog
-            # Create a separate release branch (works with  protected branches as well)
             if write_changelog == true
               info 'Generate new changelog'
               ::GitHubChangelogGenerator::RakeTask.new(:latest_release) do |config|
@@ -77,6 +76,7 @@ module Vtasks
               if system 'git diff --quiet HEAD'
                 info 'CHANGELOG has not changed. Skipping...'
               else
+                # Create a separate release branch (works with  protected branches as well)
                 if require_pull_request == true
                   info 'Create a new release branch'
                   sh "git checkout -b #{release_branch}"

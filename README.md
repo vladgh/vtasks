@@ -156,13 +156,19 @@ Vtasks::Release.new
 require 'vtasks/release'
 Vtasks::Release.new(
   write_changelog: true,
-  ci_status: true
+  require_pull_request: true
+  wait_for_ci_success: true,
+  bug_labels: 'Type: Bug',
+  enhancement_labels: 'Type: Enhancement'
 )
 ```
 
 Parameters:
 - `write_changelog`: [Boolean] whether to write the changelog (defaults to `false`)
-- `ci_status`: [Boolean] whether CI status is required (defaults to `false`)
+- `require_pull_request`: [Boolean] in case the branch is protected and a pull request is required, the task will create a separate branch on which it will commit the changelog, and merge that into master (defaults to `false`). .
+- `wait_for_ci_success`: [Boolean] whether a "SUCCESS" CI status is required (defaults to `false`)
+- `bug_labels`: [STRING] Issues with the specified labels will be added to "Fixed bugs" section (defaults to `bug`)
+- `enhancement_labels`: [STRING] Issues with the specified labels will be added to "Implemented enhancements" section (defaults to `enhancement`)
 
 Note:
 First time you have to create an annotated tag and commit the initial CHANGELOG, before creating issues or pull requests (if there these are not present it will fail)
