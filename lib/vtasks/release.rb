@@ -54,8 +54,13 @@ module Vtasks
           task level.to_sym do
             new_version = bump(level)
             release = "#{new_version[:major]}.#{new_version[:minor]}.#{new_version[:patch]}"
-            release_branch = "release_v#{release.gsub(/[^0-9A-Za-z]/, '_')}"
             initial_branch = git_branch
+
+            if require_pull_request == true
+              release_branch = "release_v#{release.gsub(/[^0-9A-Za-z]/, '_')}"
+            else
+              release_branch = initial_branch
+            end
 
             info 'Check if the repository is clean'
             git_clean_repo
