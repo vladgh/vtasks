@@ -41,6 +41,19 @@ module Git
 
     true
   end
+
+  # Deepen repository history
+  # In case there is a shallow clone (only the tip of the specified branch). This has the advantage of minimizing the amount of data transfer necessary from the repository and speeding up the build because it pulls only the minimal code necessary.
+  # Because of this, if you need to perform a custom action that relies on a different branch, you won’t be able to checkout that branch, unless you do one of the following:
+  #    $ git pull --depth=50
+  #    $ git fetch --unshallow origin
+  def git_deepen_repo
+    git_dir = `git rev-parse --git-dir`.strip
+    if File.file?("#{git_dir}/shallow")
+      info 'Deepen repository history'
+      sh "git fetch --unshallow origin"
+    end
+  end
 end # module Git
 end # module Utils
 end # module Vtasks
