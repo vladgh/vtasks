@@ -85,9 +85,6 @@ module Vtasks
                 info 'Commit the new changes'
                 sh "git commit --gpg-sign --message 'Update change log for v#{release}' CHANGELOG.md"
 
-                info 'Push the new changes'
-                sh "git push --set-upstream origin #{release_branch}"
-
                 if wait_for_ci_success == true
                   info 'Waiting for CI to finish'
                   sleep 5 until git_ci_status(release_branch) == 'success'
