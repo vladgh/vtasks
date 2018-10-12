@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.0.13](https://github.com/vladgh/vtasks/tree/v0.0.13) (2018-10-12)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.12...v0.0.13)
+
+**Implemented enhancements:**
+
+- Add option to require pull request [\#24](https://github.com/vladgh/vtasks/issues/24)
+
 ## [v0.0.12](https://github.com/vladgh/vtasks/tree/v0.0.12) (2018-10-11)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.11...v0.0.12)
 
