@@ -7,6 +7,10 @@
 
 - Add option to require pull request [\#24](https://github.com/vladgh/vtasks/issues/24)
 
+**Fixed bugs:**
+
+- Fix branches [\#25](https://github.com/vladgh/vtasks/issues/25)
+
 ## [v0.0.12](https://github.com/vladgh/vtasks/tree/v0.0.12) (2018-10-11)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.11...v0.0.12)
 
