@@ -12,12 +12,14 @@ module Vtasks
     include Vtasks::Utils::Semver
 
     attr_reader :write_changelog,
+                :require_pull_request,
                 :wait_for_ci_success,
                 :bug_labels,
                 :enhancement_labels
 
     def initialize(options = {})
       @write_changelog = options.fetch(:write_changelog, false)
+      @require_pull_request = options.fetch(:require_pull_request, false)
       @wait_for_ci_success = options.fetch(:wait_for_ci_success, false)
       @bug_labels = options.fetch(:bug_labels, 'bug')
       @enhancement_labels = options.fetch(:enhancement_labels, 'enhancement')
@@ -70,8 +72,10 @@ module Vtasks
               if system 'git diff --quiet HEAD'
                 info 'CHANGELOG has not changed. Skipping...'
               else
-                info 'Create a new release branch'
-                sh "git checkout -b #{release_branch}"
+                if require_pull_request == true
+                  info 'Create a new release branch'
+                  sh "git checkout -b #{release_branch}"
+                end
 
                 info 'Commit the new changes'
                 sh "git commit --gpg-sign --message 'Update change log for v#{release}' CHANGELOG.md"
@@ -84,9 +88,11 @@ module Vtasks
                   sleep 5 until git_ci_status(release_branch) == 'success'
                 end
 
-                info 'Merge release branch'
-                sh "git checkout #{initial_branch}"
-                sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
+                if require_pull_request == true
+                  info 'Merge release branch'
+                  sh "git checkout #{initial_branch}"
+                  sh "git merge --gpg-sign --no-ff --message 'Release v#{release}' #{release_branch}"
+                end
               end
             end
 
