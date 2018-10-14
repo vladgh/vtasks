@@ -47,7 +47,6 @@ class Build
 
     without_arguments
   end
-
 end # class Build
 end # class Image
 end # class Docker
