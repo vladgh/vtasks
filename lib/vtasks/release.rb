@@ -34,8 +34,8 @@ module Vtasks
     end
 
     def define_tasks
-      desc "Release patch version"
-      task release: ['release:patch']
+      desc 'Generate a Change log from GitHub'
+      task release: ['release:changes']
 
       namespace :release do
         begin
