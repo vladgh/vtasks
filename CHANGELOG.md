@@ -1,5 +1,15 @@
 # Change Log
 
+## [v0.0.17](https://github.com/vladgh/vtasks/tree/v0.0.17) (2018-10-21)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.16...v0.0.17)
+
+**Implemented enhancements:**
+
+- Release task should default to changes [\#28](https://github.com/vladgh/vtasks/issues/28)
+
+## [v0.0.16](https://github.com/vladgh/vtasks/tree/v0.0.16) (2018-10-12)
+[Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.15...v0.0.16)
+
 ## [v0.0.15](https://github.com/vladgh/vtasks/tree/v0.0.15) (2018-10-12)
 [Full Changelog](https://github.com/vladgh/vtasks/compare/v0.0.14...v0.0.15)
 
