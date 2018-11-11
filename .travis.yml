@@ -1,5 +1,4 @@
 dist: xenial
-group: travis_latest
 language: ruby
 install: bundle install --path vendor/bundle
 script: bundle exec rake spec
